@@ -5,7 +5,6 @@ export function pathSuffix(index: number) {
 }
 
 export default function ({ children, ...props }) {
-    console.log(props);
     return (
         <div>article</div>
     );
