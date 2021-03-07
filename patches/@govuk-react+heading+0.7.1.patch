@@ -1,0 +1,22 @@
+diff --git a/node_modules/@govuk-react/heading/es/index.js b/node_modules/@govuk-react/heading/es/index.js
+index a935e33..bfd79ee 100644
+--- a/node_modules/@govuk-react/heading/es/index.js
++++ b/node_modules/@govuk-react/heading/es/index.js
+@@ -25,17 +25,6 @@ var StyledHeading = styled('h1')(typography.textColour, function (_ref) {
+ }, {
+   display: 'block',
+   marginTop: 0
+-}, function (_ref2) {
+-  var _Object$assign;
+-
+-  var size = _ref2.size;
+-  var actualSize = Number.isNaN(Number(size)) ? HEADING_SIZES[size] : size;
+-  var scaleInfo = TYPOGRAPHY_SCALE[actualSize];
+-  return Object.assign({}, (_Object$assign = {
+-    marginBottom: scaleInfo.mobile.spacing
+-  }, _Object$assign[MEDIA_QUERIES.TABLET] = {
+-    marginBottom: scaleInfo.tablet.spacing
+-  }, _Object$assign));
+ }, spacing.withWhiteSpace());
+ /**
+  *

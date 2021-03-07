@@ -1,0 +1,73 @@
+diff --git a/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js b/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js
+index 0a48e69..0a8b543 100644
+--- a/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js
++++ b/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js
+@@ -1,10 +1,9 @@
+ var _styled;
+ 
+ import styled from 'styled-components';
+-import { BLUE } from 'govuk-colours';
+ import { MEDIA_QUERIES, SPACING } from '@govuk-react/constants';
+ var BottomNavWrapper = styled('div')((_styled = {
+-  borderBottom: "10px solid " + BLUE,
++  borderBottom: "10px solid #ffc145",
+   maxWidth: '960px',
+   margin: '0 auto',
+   width: "calc(100% - " + SPACING.SCALE_5 + ")"
+@@ -12,4 +11,3 @@ var BottomNavWrapper = styled('div')((_styled = {
+   width: "calc(100% - " + SPACING.SCALE_6 + ")"
+ }, _styled));
+ export default BottomNavWrapper;
+\ No newline at end of file
+-//# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js.map b/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js.map
+deleted file mode 100644
+index 43cabb3..0000000
+--- a/node_modules/@govuk-react/top-nav/es/atoms/bottom-nav-wrapper/index.js.map
++++ /dev/null
+@@ -1 +0,0 @@
+-{"version":3,"sources":["../../../src/atoms/bottom-nav-wrapper/index.js"],"names":["styled","BLUE","MEDIA_QUERIES","SPACING","BottomNavWrapper","borderBottom","maxWidth","margin","width","SCALE_5","LARGESCREEN","SCALE_6"],"mappings":";;AAAA,OAAOA,MAAP,MAAmB,mBAAnB;AACA,SAASC,IAAT,QAAqB,eAArB;AACA,SAASC,aAAT,EAAwBC,OAAxB,QAAuC,wBAAvC;AAEA,IAAMC,gBAAgB,GAAGJ,MAAM,CAAC,KAAD,CAAN;AACvBK,EAAAA,YAAY,kBAAgBJ,IADL;AAEvBK,EAAAA,QAAQ,EAAE,OAFa;AAGvBC,EAAAA,MAAM,EAAE,QAHe;AAIvBC,EAAAA,KAAK,mBAAiBL,OAAO,CAACM,OAAzB;AAJkB,WAKtBP,aAAa,CAACQ,WALQ,IAKM;AAC3BF,EAAAA,KAAK,mBAAiBL,OAAO,CAACQ,OAAzB;AADsB,CALN,WAAzB;AAUA,eAAeP,gBAAf","sourcesContent":["import styled from 'styled-components';\nimport { BLUE } from 'govuk-colours';\nimport { MEDIA_QUERIES, SPACING } from '@govuk-react/constants';\n\nconst BottomNavWrapper = styled('div')({\n  borderBottom: `10px solid ${BLUE}`,\n  maxWidth: '960px',\n  margin: '0 auto',\n  width: `calc(100% - ${SPACING.SCALE_5})`,\n  [MEDIA_QUERIES.LARGESCREEN]: {\n    width: `calc(100% - ${SPACING.SCALE_6})`,\n  },\n});\n\nexport default BottomNavWrapper;\n"],"file":"index.js"}
+\ No newline at end of file
+diff --git a/node_modules/@govuk-react/top-nav/es/index.js b/node_modules/@govuk-react/top-nav/es/index.js
+index 50b5ac0..3bf0ca8 100644
+--- a/node_modules/@govuk-react/top-nav/es/index.js
++++ b/node_modules/@govuk-react/top-nav/es/index.js
+@@ -182,7 +182,7 @@ function (_Component) {
+     })), React.createElement(Input, {
+       id: "govuk-react-menu-button",
+       type: "checkbox",
+-      checked: this.state.navigationOpen
++      defaultChecked: this.state.navigationOpen
+     }), React.createElement(UnorderedList, {
+       id: "govuk-react-menu",
+       serviceTitle: serviceTitle,
+diff --git a/node_modules/@govuk-react/top-nav/src/atoms/bottom-nav-wrapper/index.js b/node_modules/@govuk-react/top-nav/src/atoms/bottom-nav-wrapper/index.js
+index b84827c..92e080a 100644
+--- a/node_modules/@govuk-react/top-nav/src/atoms/bottom-nav-wrapper/index.js
++++ b/node_modules/@govuk-react/top-nav/src/atoms/bottom-nav-wrapper/index.js
+@@ -1,9 +1,9 @@
+ import styled from 'styled-components';
+-import { BLUE } from 'govuk-colours';
++import { ORANGE } from 'govuk-colours';
+ import { MEDIA_QUERIES, SPACING } from '@govuk-react/constants';
+ 
+ const BottomNavWrapper = styled('div')({
+-  borderBottom: `10px solid ${BLUE}`,
++  borderBottom: `10px solid ${ORANGE}`,
+   maxWidth: '960px',
+   margin: '0 auto',
+   width: `calc(100% - ${SPACING.SCALE_5})`,
+diff --git a/node_modules/@govuk-react/top-nav/src/index.js b/node_modules/@govuk-react/top-nav/src/index.js
+index 192feac..610dfc1 100644
+--- a/node_modules/@govuk-react/top-nav/src/index.js
++++ b/node_modules/@govuk-react/top-nav/src/index.js
+@@ -157,7 +157,7 @@ class TopNav extends Component {
+                     <MenuButton open={this.state.navigationOpen} onClick={this.toggleNavigationOpen} />
+                   </MenuButtonWrapper>
+                   {/* Referenced in MenuButton */}
+-                  <Input id="govuk-react-menu-button" type="checkbox" checked={this.state.navigationOpen} />
++                  <Input id="govuk-react-menu-button" type="checkbox" checked={this.state.navigationOpen} defaultChecked={false}/>
+                   <UnorderedList id="govuk-react-menu" serviceTitle={serviceTitle} open={this.state.navigationOpen}>
+                     {/* TODO: #205 use context api and/or render props here for `active` */}
+                     {children.length && children.map ? (

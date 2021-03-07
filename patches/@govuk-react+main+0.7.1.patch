@@ -1,0 +1,12 @@
+diff --git a/node_modules/@govuk-react/main/es/index.js b/node_modules/@govuk-react/main/es/index.js
+index 87f5860..3cf20e9 100644
+--- a/node_modules/@govuk-react/main/es/index.js
++++ b/node_modules/@govuk-react/main/es/index.js
+@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
+ import styled from 'styled-components';
+ import { MEDIA_QUERIES, SPACING, SITE_WIDTH } from '@govuk-react/constants';
+ var OuterContainer = styled('div')({
+-  paddingTop: SPACING.SCALE_5,
+   textAlign: 'center'
+ }); // This is currently 'width-container' and not 'main' from govuk-frontend
+ // Maybe we should deprecate this component in favour of Page.Main and Page.WidthContainer?
