@@ -5,7 +5,7 @@
     ],
     "plugins": [
         ["babel-plugin-styled-components", {
-            "ssr": false, "displayName": false, "preprocess": false
+            "ssr": true, "displayName": false, "preprocess": false
         }],
         "@babel/plugin-proposal-class-properties",
         "@babel/plugin-proposal-export-default-from"
