@@ -62,7 +62,7 @@ export const plugins = [
                     path: "/news",
                     pageSize: 10,
                     template: require.resolve("./src/components/templates/news-list.tsx"),
-                    serialize: (results) => results.allMdx.edges,
+                    serialize: (results) => results.allMdx.edges ?? [],
                     query: `
                         query GetNews {
                             allMdx(
