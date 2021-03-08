@@ -12,7 +12,7 @@ collections:
   #######################################################
   - name: "constitution"
     label: "Constitution"
-    folder: "src/pages/admiralty/"
+    folder: "src/pages/admiralty/constitution/"
     create: true
     slug: "{{identifier}}"
     extension: "mdx"
@@ -43,7 +43,7 @@ collections:
         widget: "select"
         required: true
         hint: "The type of law this legislation is classed as."
-        options: ["ORDINARY LAW", "CONSTITUTION", "TREATY", "PRECEDENT"]
+        options: ["STANDING ORDER", "CONSTITUTION", "TREATY", "PRECEDENT"]
       - label: "Order of Importance"
         name: "order"
         widget: "number"

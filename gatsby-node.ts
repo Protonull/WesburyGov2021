@@ -1,8 +1,6 @@
-import {Page as GatsbyPage, Node as GatsbyNode} from "gatsby";
-import {filterObject, Pocket} from "./src/utilities";
-import {parseDate, segmentArray} from "js-utilities";
-import {pathSuffix} from "./src/components/templates/news-article";
-import path from "path";
+import {Node as GatsbyNode, Page as GatsbyPage} from "gatsby";
+import {filterObject, Pocket, startsWithNotEqual} from "./src/utilities";
+import {parseDate} from "js-utilities";
 
 // ------------------------------------------------------------
 // Collections
@@ -15,49 +13,38 @@ const PAGES: {[key: string]: GatsbyPage & GatsbyNode} = {};
 // ------------------------------------------------------------
 
 export function onCreatePage({ page }) {
+    console.log("Creating page: " + page.path);
     PAGES[page.path] = page;
+    // Create default law frontmatter template
+    if (startsWithNotEqual(page.path, "/admiralty/")) {
+        const frontmatter: Pocket = (page.context.frontmatter ??= {});
+        frontmatter.title ??= "Document Title";
+        frontmatter.subtitle ??= "Ordered by the Admiral";
+        frontmatter.type ??= "STANDING ORDER";
+        frontmatter.order ??= 0;
+        frontmatter.path = page.path;
+    }
+    // Create default news template
+    if (startsWithNotEqual(page.path, "/news/")
+            && page.isCreatedByStatefulCreatePages === true) {
+        // Front matter template
+        const frontmatter: Pocket = (page.context.frontmatter ??= {});
+        frontmatter.title ??= "Document Title";
+        frontmatter.author ??= "Author";
+        frontmatter.snippet ??= null;
+        frontmatter.date ??= new Date();
+        frontmatter.date = parseDate(frontmatter.date); // Just in case
+        frontmatter.path = page.path;
+    }
 }
 
-export function onPostBootstrap({ actions: { createPage } }) {
-    // Retrieve all laws
-    PAGES["/admiralty/"].context["documents"] =
-        Object.values(filterObject(PAGES, (key) => key.startsWith("/admiralty/documents/")))
-            .map((document) => {
-                const frontmatter: Pocket = Object.assign({
-                    title: "Document Title",
-                    date: new Date(),
-                    type: "STANDING ORDER",
-                    order: 0
-                }, document.context.frontmatter);
-                frontmatter.path = document.path;
-                frontmatter.date = parseDate(frontmatter.date);
-                return frontmatter;
-            });
-    // Retrieve all news
-    const paginatedNews = segmentArray(Object.values(filterObject(PAGES, (key) => key.startsWith("/news/")))
-        .map((document) => {
-            const frontmatter: Pocket = Object.assign({
-                title: "Article Title",
-                author: "Author",
-                date: new Date(),
-                snippet: null
-            }, document.context.frontmatter);
-            frontmatter.path = document.path;
-            frontmatter.date = parseDate(frontmatter.date);
-            return frontmatter;
-        })
-        .sort((lhs, rhs) => (rhs.date ?? 0) - (lhs.date ?? 0)), 20);
-    for (let i = 0, l = paginatedNews.length; i < l; i++) {
-        createPage({
-            path: "/news/" + pathSuffix(i),
-            component: path.resolve("./src/components/templates/news-article.tsx"),
-            context: {
-                currentPage: i,
-                hasPrevious: (i - 1) >= 0,
-                hasNext: (i + 1) < l,
-                articles: paginatedNews[i]
-            }
-        });
+export function onPostBootstrap() {
+    // Add page's path to the page's context
+    for (const [key, value] of Object.entries(PAGES)) {
+        value.context.path = key;
     }
-
+    // Retrieve all laws
+    PAGES["/admiralty/"].context["documents"] = Object.values(
+        filterObject(PAGES, (key) => startsWithNotEqual(key, "/admiralty/")))
+        .map(document => document.context.frontmatter);
 }

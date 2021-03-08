@@ -6,7 +6,7 @@ import {Helmet} from "react-helmet";
 import Page from "@govuk-react/page";
 import Main from "@govuk-react/main";
 import TopNav, {asNavLinkAnchor, asTopNavAnchor} from "@govuk-react/top-nav";
-import hash from "../../utilities";
+import {hash} from "../../utilities";
 
 const LogoAnchor = asTopNavAnchor("a");
 const NavAnchor = asNavLinkAnchor("a");

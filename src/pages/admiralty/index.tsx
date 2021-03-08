@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import hash, {Pocket} from "../../utilities";
+import {hash, Pocket} from "../../utilities";
 import {arrayHasElements,ensureNumber} from "js-utilities";
 
 import BreadCrumbs from "@govuk-react/breadcrumbs";

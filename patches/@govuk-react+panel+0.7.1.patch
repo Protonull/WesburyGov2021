@@ -1,0 +1,29 @@
+diff --git a/node_modules/@govuk-react/panel/es/index.js b/node_modules/@govuk-react/panel/es/index.js
+index e13a33e..b5bfb0e 100644
+--- a/node_modules/@govuk-react/panel/es/index.js
++++ b/node_modules/@govuk-react/panel/es/index.js
+@@ -21,9 +21,13 @@ var StyledPanel = styled('div')(typography.font({
+   textAlign: 'center'
+ }, _styled[MEDIA_QUERIES.TABLET] = {
+   padding: SPACING_POINTS[7] - RAW_BORDER_WIDTH
+-}, _styled.color = WHITE, _styled.background = TURQUOISE, _styled), spacing.withWhiteSpace()); // NB govuk-frontend allows for the headingLevel to change, but defaults to h1
++}, _styled.color = WHITE, _styled.background = function background(props) {
++    return props.bgColor;
++}, _styled), spacing.withWhiteSpace()); // NB govuk-frontend allows for the headingLevel to change, but defaults to h1
+ // we're not supporting headingLevel at this time
+ 
++
++
+ var StyledTitle = styled('h1')({
+   marginTop: 0,
+   marginBottom: SPACING_POINTS[6],
+@@ -68,7 +72,8 @@ var Panel = function Panel(_ref) {
+ };
+ 
+ Panel.defaultProps = {
+-  children: undefined
++  children: undefined,
++  bgColor: TURQUOISE
+ };
+ export default Panel;
+ //# sourceMappingURL=index.js.map

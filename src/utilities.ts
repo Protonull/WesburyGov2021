@@ -8,7 +8,7 @@ export type Pocket = {
 /**
  * Hashes a series of given things together.
  */
-export default function hash(...objects: any[]): number {
+export function hash(...objects: any[]): number {
     if (!arrayHasElements(objects)) {
         return 0;
     }
@@ -45,6 +45,13 @@ export function filterObject(object: object, predicate: (key, value) => boolean)
  */
 export function objectHasValue(object: object, predicate: (value) => boolean): boolean {
     return Object.values(object).findIndex(predicate) >= 0;
+}
+
+/**
+ * Checks whether a given string starts with but does not equal a given reference string.
+ */
+export function startsWithNotEqual(string: string, checkAgainst: string): boolean {
+    return exists(string) && string !== checkAgainst && string.startsWith(checkAgainst);
 }
 
 export function stringEqualsNotNull(former: string, latter: string): boolean {
