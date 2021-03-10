@@ -1,11 +1,32 @@
-import React from "react";
+import React, {Fragment} from "react";
+import styled from "styled-components";
+import {spacing, typography} from "@govuk-react/lib";
+import {parseDate} from "js-utilities";
+import dateFormat from "dateformat";
 
-export function pathSuffix(index: number) {
-    return index == 0 ? "" : "-" + index;
-}
+import Chin from "../basic/chin";
+import {H1} from "@govuk-react/heading";
+import MdxWrapper from "../md-wrapper";
 
-export default function ({ children, ...props }) {
+const SupportingText = styled("div")(
+    {
+        color: "#717171",
+    },
+    () => typography.font({ size: 19 }),
+    spacing.withWhiteSpace()
+);
+
+export default function ({ children, pageContext }) {
+    const title = pageContext.frontmatter.news.title ?? "Testing";
+    const date = parseDate(pageContext.frontmatter.news.date) ?? new Date(0);
     return (
-        <div>article</div>
+        <Fragment>
+            <Chin/>
+            <H1>{title}</H1>
+            <SupportingText>{dateFormat(date, "dd mmmm yyyy")}</SupportingText>
+            <MdxWrapper>
+                {children}
+            </MdxWrapper>
+        </Fragment>
     );
 }

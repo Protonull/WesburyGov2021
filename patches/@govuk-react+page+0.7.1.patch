@@ -1,0 +1,15 @@
+diff --git a/node_modules/@govuk-react/page/es/index.js b/node_modules/@govuk-react/page/es/index.js
+index 0c36af2..5047552 100644
+--- a/node_modules/@govuk-react/page/es/index.js
++++ b/node_modules/@govuk-react/page/es/index.js
+@@ -39,9 +39,7 @@ var Page = function Page(_ref) {
+       beforeChildren = _ref.beforeChildren,
+       MainComponent = _ref.main,
+       Container = _ref.container;
+-  return React.createElement(React.Fragment, null, React.createElement(SkipLink, {
+-    href: "#" + id
+-  }), header, React.createElement(Container, null, beforeChildren, React.createElement(MainComponent, {
++  return React.createElement(React.Fragment, null, header, React.createElement(Container, null, beforeChildren, React.createElement(MainComponent, {
+     id: id
+   }, children)), footer);
+ };

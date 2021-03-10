@@ -6,38 +6,32 @@ export const plugins = [
             modulePath: "./src/components/netlifycms/cms.tsx"
         },
     },
-    "gatsby-plugin-styled-components",
+    {
+        resolve: "gatsby-plugin-styled-components",
+        options: {
+            displayName: false
+        },
+    },
     "gatsby-transformer-remark",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-
-
-
-
-
-    // Source for constitution files which need their own layout
-    {
-        resolve: "gatsby-source-filesystem",
-        options: {
-            name: "constitutional",
-            path: "./src/pages/admiralty/constitution",
-        },
-    },
+    "gatsby-plugin-image",
     // Source for news articles which need their own layout
     {
         resolve: "gatsby-source-filesystem",
         options: {
             name: "news",
-            path: "./src/pages/news",
+            path: "./src/pages/news"
         },
     },
     // Source for files generally (got to put this last because of overlap)
     {
         resolve: "gatsby-source-filesystem",
         options: {
-            name: "pages",
+            name: "default",
             path: "./src/pages/",
+            ignore: ["news/\.*"]
         },
     },
     {
@@ -45,15 +39,11 @@ export const plugins = [
         options: {
             defaultLayouts: {
                 default: require.resolve("./src/components/md-wrapper.tsx"),
-                constitutional: require.resolve("./src/components/templates/constitutional.tsx"),
+                news: require.resolve("./src/components/templates/news-article.tsx")
             },
         },
     },
-
-
-
-
-
+    "gatsby-plugin-mdx-frontmatter",
     {
         resolve: "gatsby-plugin-paginate",
         options: {
@@ -62,20 +52,25 @@ export const plugins = [
                     path: "/news",
                     pageSize: 10,
                     template: require.resolve("./src/components/templates/news-list.tsx"),
-                    serialize: (results) => results.allMdx.edges ?? [],
+                    serialize: (results) => results?.allFile?.edges ?? [],
                     query: `
                         query GetNews {
-                            allMdx(
-                                filter: {fileAbsolutePath: {regex: "/src\\\\/pages\\\\/news\\\\/.+/"}}
-                                sort: {order: DESC, fields: frontmatter___date}
+                            allFile(
+                                sort: {order: DESC, fields: childrenMdx___frontmatter___news___date}
+                                filter: {childMdx: {frontmatter: {type: {eq: "news"}}}, sourceInstanceName: {eq: "news"}}
                             ) {
                                 edges {
                                     node {
-                                        slug
-                                        frontmatter {
-                                            title
-                                            author
-                                            date
+                                        childMdx {
+                                            slug
+                                            frontmatter {
+                                                news {
+                                                    title
+                                                    date
+                                                    excerpt
+                                                    icon
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -86,12 +81,6 @@ export const plugins = [
             ]
         }
     },
-
-
-
-
-
-    "gatsby-plugin-mdx-frontmatter",
     "@wardpeet/gatsby-plugin-static-site",
     "gatsby-plugin-offline",
     "gatsby-plugin-no-javascript" // Always have this last

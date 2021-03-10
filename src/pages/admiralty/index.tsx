@@ -3,6 +3,7 @@ import {hash, Pocket} from "../../utilities";
 import {arrayHasElements,ensureNumber} from "js-utilities";
 
 import BreadCrumbs from "@govuk-react/breadcrumbs";
+import WarningText from "@govuk-react/warning-text";
 import GridRow from "@govuk-react/grid-row";
 import GridCol from "@govuk-react/grid-col";
 import {H2} from "@govuk-react/heading";
@@ -48,6 +49,11 @@ export default function ({ pageContext }) {
                 </BreadCrumbs.Link>
                 Admiralty
             </BreadCrumbs>
+
+            {/* TODO: Get rid of this when the laws and such are up to date! */}
+            <WarningText>This page is <i>currently</i> not reflective of Wesbury's legal situation.</WarningText>
+            <br/>
+
             <GridRow>
                 <GridCol setWidth="one-half">
                     <H2>Constitution</H2>

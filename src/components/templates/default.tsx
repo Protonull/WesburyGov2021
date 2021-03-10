@@ -1,12 +1,15 @@
 import React, {Fragment} from "react";
 import config from "../../config";
+import {hash} from "../../utilities";
+import styled from "styled-components";
 import "sanitize.css";
 
 import {Helmet} from "react-helmet";
 import Page from "@govuk-react/page";
 import Main from "@govuk-react/main";
 import TopNav, {asNavLinkAnchor, asTopNavAnchor} from "@govuk-react/top-nav";
-import {hash} from "../../utilities";
+import Chin from "../basic/chin";
+import Footer from "@govuk-react/footer";
 
 const LogoAnchor = asTopNavAnchor("a");
 const NavAnchor = asNavLinkAnchor("a");
@@ -29,14 +32,40 @@ const Header = (
     </TopNav>
 );
 
-export default function({ children, ...props }) {
+const Foot = (
+    <Footer
+        copyright={{
+            text: "Protonull",
+            link: "/about/",
+            image: {
+                source: "/static/wesbury_emblem.png",
+                height: 156,
+                width: 125,
+                style: {
+                    opacity: 0.6
+                }
+            }
+        }}/>
+);
+
+const Container = styled.div`
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+`;
+
+export default function({ children }) {
     return (
         <Fragment>
             <Helmet>
                 <title>{config.fullTitle}</title>
             </Helmet>
-            <Page header={Header} main={Main}>
-                {children}
+            <Page header={Header} main={Main} footer={Foot}>
+                <Container>
+                    {children}
+                    <Chin/>
+                </Container>
             </Page>
         </Fragment>
     );

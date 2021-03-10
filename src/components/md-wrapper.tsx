@@ -1,17 +1,18 @@
 import React, {Fragment} from "react";
 
 import {MDXProvider} from "@mdx-js/react";
-import Chin from ".//chin";
+import Chin from "./basic/chin";
 
-import Paragraph from ".//basic/paragraph";
+import Paragraph from "./basic/paragraph";
 import {H1,H2,H3,H4,H5,H6} from "@govuk-react/heading";
 // ThematicBreak https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr
-import BlockQuote from ".//basic/block-quote";
+import BlockQuote from "@govuk-react/inset-text";
 import UnorderedList from "@govuk-react/unordered-list";
 import OrderedList from "@govuk-react/ordered-list";
 import ListItem from "@govuk-react/list-item";
 import Table from "@govuk-react/table";
 import ALink from "@govuk-react/link";
+import Image from "./basic/image";
 
 /** See order at: https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#components */
 const components = {
@@ -39,7 +40,7 @@ const components = {
     inlineCode: null,
     //hr: null,
     a: ALink,
-    //img: null
+    img: Image
 };
 
 export default function ({ children, ...props }) {
