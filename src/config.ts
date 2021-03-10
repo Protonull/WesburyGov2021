@@ -8,7 +8,7 @@ export default Object.seal(new class Config {
     navigation: Link[] = [
         {
             label: "News",
-            href: "/news/1"
+            href: "/news"
         },
         {
             label: "Admiralty",
@@ -28,5 +28,9 @@ export default Object.seal(new class Config {
             href: "/about"
         }
     ];
+
+    roots: {[key: string]: string} = {
+        news: "/news/"
+    };
 
 });
