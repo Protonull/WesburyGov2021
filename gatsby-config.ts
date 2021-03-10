@@ -61,8 +61,8 @@ export const plugins = [
                             ) {
                                 edges {
                                     node {
+                                        name
                                         childMdx {
-                                            slug
                                             frontmatter {
                                                 news {
                                                     title
