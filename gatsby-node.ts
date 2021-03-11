@@ -8,7 +8,7 @@ function printPageCreation(path: string) {
 async function compileMdxCollection(collection: string, graphql, getNode) {
     return ((await graphql(`
             query GetCollection {
-                allFile(filter: {sourceInstanceName: {eq: "${collection}"}}) {
+                allFile(filter: {sourceInstanceName: {eq: "${collection}"}, ext: {in: ".mdx"}}) {
                     edges {
                         node {
                             name
@@ -21,9 +21,6 @@ async function compileMdxCollection(collection: string, graphql, getNode) {
             }
         `))?.data?.allFile?.edges ?? [])
         .map(result => {
-            if (!exists(result)) {
-                return null;
-            }
             const node = getNode(result.node.childMdx.id);
             if (!exists(node)) {
                 console.warn("Could not find node [" + result.node.name + "] " +
