@@ -20,7 +20,7 @@ export default Object.seal(new class Config {
         },
         {
             label: "Discord",
-            href: "https://discord.gg/gwrEc2PhWT",
+            href: "https://discord.gg/8Uc3g2JsFr",
             target: "_blank"
         },
         {
