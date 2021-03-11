@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "yarn patch-package",
     "clean": "yarn gatsby clean",
-    "start": "yarn run develop",
+    "start": "yarn run clean && yarn run develop",
     "develop": "yarn gatsby develop",
     "build": "yarn gatsby build",
     "serve": "yarn gatsby serve"

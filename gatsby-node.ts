@@ -35,7 +35,7 @@ async function compileMdxCollection(collection: string, graphql, getNode) {
         .filter(result => exists(result));
 }
 
-export async function createPages({ actions, graphql, getNode }) {
+export async function createPagesStatefully({ actions, graphql, getNode }) {
     // Collect and paginate news
     {
         const articlesPerPage = 20;

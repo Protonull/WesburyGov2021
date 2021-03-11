@@ -25,7 +25,9 @@ function displayLawLinks(laws: Pocket[], emptyMessage: string) {
             <UnorderedList>
                 {laws.map(law => (
                     <ListItem key={hash("law", law)}>
-                        <Link href={config.roots.laws + law.slug}>{law.frontmatter?.title ?? "Law"}</Link>
+                        <Link href={config.roots.laws + law.slug}>
+                            {law.frontmatter?.title ?? "Law"}
+                        </Link>
                     </ListItem>
                 ))}
             </UnorderedList>
@@ -37,11 +39,11 @@ function displayLawLinks(laws: Pocket[], emptyMessage: string) {
 }
 
 export default function ({ pageContext }) {
-    const documents = pageContext.laws ?? [];
-    const constitution = getLawType(documents, "CONSTITUTION");
-    const treaties = getLawType(documents, "TREATY");
-    const laws = getLawType(documents, "STANDING ORDER");
-    const precedents = getLawType(documents, "PRECEDENT");
+    const laws = pageContext.laws ?? [];
+    const constitution = getLawType(laws, "CONSTITUTION");
+    const treaties = getLawType(laws, "TREATY");
+    const orders = getLawType(laws, "STANDING ORDER");
+    const precedents = getLawType(laws, "PRECEDENT");
     return (
         <Fragment>
             <BreadCrumbs>
@@ -50,11 +52,6 @@ export default function ({ pageContext }) {
                 </BreadCrumbs.Link>
                 Laws
             </BreadCrumbs>
-
-            {/* TODO: Get rid of this when the laws and such are up to date! */}
-            <WarningText>This page is <i>currently</i> not reflective of Wesbury's legal situation.</WarningText>
-            <br/>
-
             <GridRow>
                 <GridCol setWidth="one-half">
                     <H2>Constitution</H2>
@@ -62,7 +59,7 @@ export default function ({ pageContext }) {
                     <br/>
                 </GridCol>
                 <GridCol setWidth="one-half">
-                    <H2>Agreements</H2>
+                    <H2>Treaties</H2>
                     {displayLawLinks(treaties, "Wesbury current has no treaties.")}
                     <br/>
                 </GridCol>
@@ -70,7 +67,7 @@ export default function ({ pageContext }) {
             <GridRow>
                 <GridCol setWidth="one-half">
                     <H2>Standing Orders</H2>
-                    {displayLawLinks(laws, "Wesbury currently has no standing orders.")}
+                    {displayLawLinks(orders, "Wesbury currently has no standing orders.")}
                     <br/>
                 </GridCol>
                 <GridCol setWidth="one-half">
