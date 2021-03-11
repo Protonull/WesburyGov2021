@@ -11,8 +11,8 @@ export default Object.seal(new class Config {
             href: "/news"
         },
         {
-            label: "Admiralty",
-            href: "/admiralty"
+            label: "Laws",
+            href: "/laws"
         },
         {
             label: "Watchdog",
@@ -30,7 +30,8 @@ export default Object.seal(new class Config {
     ];
 
     roots: {[key: string]: string} = {
-        news: "/news/"
+        news: "/news/",
+        laws: "/laws/"
     };
 
 });

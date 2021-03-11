@@ -17,8 +17,10 @@ const SupportingText = styled("div")(
 );
 
 export default function ({ children, pageContext }) {
-    const title = pageContext.frontmatter.news.title ?? "Testing";
-    const date = parseDate(pageContext.frontmatter.news.date) ?? new Date(0);
+    console.log("context:", pageContext);
+
+    const title = pageContext.frontmatter?.title ?? "Testing";
+    const date = parseDate(pageContext.frontmatter?.date) ?? new Date(0);
     return (
         <Fragment>
             <Chin/>

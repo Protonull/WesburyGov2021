@@ -25,13 +25,21 @@ export const plugins = [
             path: "./src/pages/news"
         },
     },
+    // Source for law documents which need their own layout
+    {
+        resolve: "gatsby-source-filesystem",
+        options: {
+            name: "laws",
+            path: "./src/pages/laws"
+        },
+    },
     // Source for files generally (got to put this last because of overlap)
     {
         resolve: "gatsby-source-filesystem",
         options: {
             name: "default",
             path: "./src/pages/",
-            ignore: ["news/\.*"]
+            ignore: ["news/\.*", "laws/\.*"]
         },
     },
     {
@@ -39,7 +47,8 @@ export const plugins = [
         options: {
             defaultLayouts: {
                 default: require.resolve("./src/components/md-wrapper.tsx"),
-                news: require.resolve("./src/components/templates/news-article.tsx")
+                news: require.resolve("./src/components/templates/news-article.tsx"),
+                laws: require.resolve("./src/components/templates/laws-document.tsx")
             },
         },
     },

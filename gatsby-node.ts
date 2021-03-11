@@ -1,98 +1,83 @@
 import config from "./src/config";
-import {Node as GatsbyNode, Page as GatsbyPage} from "gatsby";
-import {Pocket} from "./src/utilities";
-import {segmentArray} from "js-utilities";
+import {exists, parseDate, segmentArray} from "js-utilities";
 
-const PAGES: {[key: string]: GatsbyPage & GatsbyNode} = {};
-
-export function createSchemaCustomization({ actions }) {
-    // Types with an ! are non-null, think of everything else as for example "title?: string"
-    actions.createTypes(`
-        type WesburyNews {
-            title: String!
-            author: String!
-            excerpt: String
-            date: String!
-            categories: [String!]
-            icon: String
-        }
-        type WesburyLaw {
-            type: String!
-            order: Int!
-            current: Boolean!
-        }
-        extend type MdxFrontmatter {
-            type: String!
-
-            news: WesburyNews
-            law: WesburyLaw
-        }
-    `);
+function printPageCreation(path: string) {
+    console.log("Creating page: " + path);
 }
 
-export async function createPages({ actions, graphql }) {
-    // Paginate news
-    {
-        let results = ((await graphql(`
-            query GetNews {
-                allFile(
-                    sort: {order: DESC, fields: childrenMdx___frontmatter___news___date}
-                    filter: {childMdx: {frontmatter: {type: {eq: "news"}}}, sourceInstanceName: {eq: "news"}}
-                ) {
+async function compileMdxCollection(collection: string, graphql, getNode) {
+    return ((await graphql(`
+            query GetCollection {
+                allFile(filter: {sourceInstanceName: {eq: "${collection}"}}) {
                     edges {
                         node {
                             name
                             childMdx {
-                                frontmatter {
-                                    news {
-                                        title
-                                        date
-                                        excerpt
-                                        icon
-                                    }
-                                }
+                                id
                             }
                         }
                     }
                 }
             }
-        `))?.data?.allFile?.edges ?? []);
-        results = results.map(result => result.node ?? {});
-        results = results.map(result => <Pocket>{
-            slug: result?.name,
-            frontmatter: {
-                ...result?.childMdx?.frontmatter
+        `))?.data?.allFile?.edges ?? [])
+        .map(result => {
+            const node = getNode(result.node.childMdx.id);
+            if (!exists(node)) {
+                console.warn("Could not find node [" + result.node.name + "] " +
+                    "with id [" + result.node.childMdx.id + "] in collection [" + collection + "]!");
+                return null;
             }
-        });
-        results = segmentArray(results, 20 /** items per page */);
+            return {
+                slug: result.node.name,
+                frontmatter: node.frontmatter ?? {}
+            };
+        })
+        .filter(result => exists(result));
+}
+
+export async function createPages({ actions, graphql, getNode }) {
+    // Collect and paginate news
+    {
+        const articlesPerPage = 20;
+        const articles = await compileMdxCollection("news", graphql, getNode);
+        articles.sort((lhs, rhs) =>
+            // @ts-ignore SHUT UP TYPESCRIPT, THIS WORKS FINE!
+            (parseDate(rhs.frontmatter?.date) ?? 0) - (parseDate(lhs.frontmatter?.date) ?? 0));
+        const pages = segmentArray(articles, articlesPerPage);
         function generatePath(index: number, maximum: number): string {
             if (index < 0 || index >= maximum) {
                 return null;
             }
             return config.roots.news + (index == 0 ? "" : (index + 1) + "/");
         }
-        for (let i = 0, l = results.length; i < l; i++) {
+        for (let i = 0, l = pages.length; i < l; i++) {
+            const path = generatePath(i, l);
+            printPageCreation(path);
             actions.createPage({
-                path: generatePath(i, l),
+                path: path,
                 component: require.resolve("./src/components/templates/news-list.tsx"),
                 context: {
-                    items: results[i],
+                    items: pages[i],
                     previousPath: generatePath(i - 1, l),
                     nextPath: generatePath(i + 1, l)
                 }
             });
         }
     }
-}
-
-export function onCreatePage({ page }) {
-    console.log("Creating page: " + page.path);
-    PAGES[page.path] = page;
-}
-
-export function onPostBootstrap() {
-    // Add page's path to the page's context
-    for (const [key, value] of Object.entries(PAGES)) {
-        value.context.path = key;
+    // Collect laws and create page
+    {
+        const path = config.roots.laws;
+        printPageCreation(path);
+        actions.createPage({
+            path: path,
+            component: require.resolve("./src/components/templates/laws-list.tsx"),
+            context: {
+                laws: await compileMdxCollection("laws", graphql, getNode)
+            }
+        });
     }
+}
+
+export async function onCreatePage({ page }) {
+    printPageCreation(page.path);
 }

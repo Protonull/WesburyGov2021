@@ -1,4 +1,6 @@
 import React, {Fragment} from "react";
+import config from "../../config";
+
 import {Helmet} from "react-helmet";
 import BreadCrumbs from "@govuk-react/breadcrumbs";
 import Panel from "@govuk-react/panel";
@@ -6,26 +8,22 @@ import MDXWrapper from "../md-wrapper";
 
 export default function ({ children, pageContext, ...props }) {
     const frontmatter = pageContext.frontmatter ?? {};
-
-    console.log("frontmatter:", frontmatter);
-    console.log("props:", props);
-
+    const title = frontmatter.title ?? "Law";
     return (
         <Fragment>
             <Helmet>
-                <title>{frontmatter.title}</title>
+                <title>{title}</title>
             </Helmet>
             <BreadCrumbs>
-                <BreadCrumbs.Link href="../../../">
+                <BreadCrumbs.Link href="/">
                     Wesbury
                 </BreadCrumbs.Link>
-                <BreadCrumbs.Link href="../../">
-                    Admiralty
+                <BreadCrumbs.Link href={config.roots.laws}>
+                    Laws
                 </BreadCrumbs.Link>
-                <span>Constitution</span>
-                <span>{frontmatter.title}</span>
+                <span>{title}</span>
             </BreadCrumbs>
-            <Panel title={frontmatter.title} bgColor={"#FFC145"}>
+            <Panel title={title} bgColor={"#FFC145"}>
                 {frontmatter.subtitle}
             </Panel>
             <MDXWrapper chin={false}>
