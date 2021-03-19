@@ -4,7 +4,7 @@ import config from "../../config";
 import {Helmet} from "react-helmet";
 import BreadCrumbs from "@govuk-react/breadcrumbs";
 import Panel from "@govuk-react/panel";
-import MDXWrapper from "../md-wrapper";
+import MDXWrapper from "../mdx-wrapper";
 
 export default function ({ children, pageContext, ...props }) {
     const frontmatter = pageContext.frontmatter ?? {};

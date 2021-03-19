@@ -46,7 +46,7 @@ export const plugins = [
         resolve: "gatsby-plugin-mdx",
         options: {
             defaultLayouts: {
-                default: require.resolve("./src/components/md-wrapper.tsx"),
+                default: require.resolve("./src/components/mdx-wrapper.tsx"),
                 news: require.resolve("./src/components/templates/news-article.tsx"),
                 laws: require.resolve("./src/components/templates/laws-document.tsx")
             },

@@ -6,7 +6,7 @@ import dateFormat from "dateformat";
 
 import Chin from "../basic/chin";
 import {H1} from "@govuk-react/heading";
-import MdxWrapper from "../md-wrapper";
+import MdxWrapper from "../mdx-wrapper";
 
 const SupportingText = styled("div")(
     {
