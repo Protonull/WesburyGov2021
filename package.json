@@ -22,7 +22,7 @@
     "dateformat": "^4.5.1",
     "gatsby": "^3.0.1",
     "gatsby-plugin-image": "^1.0.0",
-    "gatsby-plugin-mdx": "^2.0.0",
+    "gatsby-plugin-mdx": "^2.14.1",
     "gatsby-plugin-mdx-frontmatter": "^0.0.2",
     "gatsby-plugin-netlify-cms": "^5.0.0",
     "gatsby-plugin-no-javascript": "^2.0.5",
