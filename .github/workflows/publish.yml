@@ -27,3 +27,5 @@ jobs:
       with:
         target_branch: gh-pages
         build_dir: public
+      env:
+        GITHUB_TOKEN: ${{ secrets.WESBURY_GH_TOKEN }}
