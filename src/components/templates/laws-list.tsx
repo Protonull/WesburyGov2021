@@ -25,7 +25,7 @@ function displayLawLinks(laws: Pocket[], emptyMessage: string) {
             <UnorderedList>
                 {laws.map(law => (
                     <ListItem key={hash("law", law)}>
-                        <Link href={config.roots.laws + law.slug}>
+                        <Link href={"/Wesbury" + config.roots.laws + law.slug}>
                             {law.frontmatter?.title ?? "Law"}
                         </Link>
                     </ListItem>

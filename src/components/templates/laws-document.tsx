@@ -15,10 +15,10 @@ export default function ({ children, pageContext, ...props }) {
                 <title>{title}</title>
             </Helmet>
             <BreadCrumbs>
-                <BreadCrumbs.Link href="/">
+                <BreadCrumbs.Link href="/Wesbury/">
                     Wesbury
                 </BreadCrumbs.Link>
-                <BreadCrumbs.Link href={config.roots.laws}>
+                <BreadCrumbs.Link href={"/Wesbury" + config.roots.laws}>
                     Laws
                 </BreadCrumbs.Link>
                 <span>{title}</span>
