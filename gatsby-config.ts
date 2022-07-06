@@ -2,12 +2,7 @@ export const pathPrefix = "Wesbury";
 
 export const plugins = [
     "gatsby-plugin-typescript",
-    {
-        resolve: "gatsby-plugin-netlify-cms",
-        options: {
-            modulePath: "./src/components/netlifycms/cms.tsx"
-        },
-    },
+    "gatsby-plugin-netlify-cms",
     {
         resolve: "gatsby-plugin-styled-components",
         options: {
