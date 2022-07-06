@@ -1,6 +1,6 @@
 # Government of Wesbury
 
-This project was the successor to https://github.com/Protonull/BloomGov2019, using the same template (govuk). React was chosen for its flexibility in comparison to Jekyll's Liquid templating language. Gatsby was chosen for its vast array of plugins, like templated-MDX support, making it more appealing than arguably better alternatives such as NextJS. The move to Gatsby was often regretted however, given Gatsby's obsession with GraphQL, and the dependency hell of NodeJS.
+This project was the successor to https://github.com/Protonull/BloomGov2019, using the same template ([govuk](https://govuk-react.github.io/govuk-react/)). [React](https://reactjs.org/) was chosen for its flexibility in comparison to [Jekyll](https://jekyllrb.com/)'s [Liquid](https://jekyllrb.com/docs/liquid/) templating language. [Gatsby](https://www.gatsbyjs.com/) was chosen for its vast array of plugins, like templated-MDX support, making it more appealing than arguably better alternatives such as [NextJS](https://nextjs.org/). The move to [Gatsby](https://www.gatsbyjs.com/) was often regretted however, given its obsession with [GraphQL](https://graphql.org/), and the dependency hell of [NodeJS](https://nodejs.org/en/).
 
 ## SECURITY WARNING
 
