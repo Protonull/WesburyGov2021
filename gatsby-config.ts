@@ -1,3 +1,5 @@
+export const pathPrefix = "Wesbury";
+
 export const plugins = [
     "gatsby-plugin-typescript",
     {
