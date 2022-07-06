@@ -81,10 +81,10 @@ export default function ({ pageContext }) {
         <Fragment>
             <Chin/>
             {(pageContext.items ?? []).map(post =>
-                <Wrapper key={hash("news", post)} href={"/Wesbury" + config.roots.news + post.slug}>
+                <Wrapper key={hash("news", post)} href={"/WesburyGov2021" + config.roots.news + post.slug}>
                     <Internal>
                         <ImageWrapper>
-                            <img src={post.frontmatter?.icon ?? "/Wesbury/static/news_stock.png"}
+                            <img src={post.frontmatter?.icon ?? "/WesburyGov2021/static/news_stock.png"}
                                  width={100} height={100} alt={""}/>
                         </ImageWrapper>
                         <Content>

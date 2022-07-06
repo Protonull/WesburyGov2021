@@ -1,10 +1,10 @@
 backend:
   name: github
-  repo: Protonull/Wesbury
+  repo: Protonull/WesburyGov2021
   branch: main
 
 media_folder: "static/uploads/"
-public_folder: "/Wesbury/uploads/"
+public_folder: "/WesburyGov2021/uploads/"
 
 collections:
   #######################################################

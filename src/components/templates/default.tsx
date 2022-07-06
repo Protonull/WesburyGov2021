@@ -15,8 +15,8 @@ const LogoAnchor = asTopNavAnchor("a");
 const NavAnchor = asNavLinkAnchor("a");
 
 const Company = (
-    <LogoAnchor href="/Wesbury/">
-        <TopNav.IconTitle icon={<img src={"/Wesbury/static/wesbury_logo.png"}
+    <LogoAnchor href="/WesburyGov2021/">
+        <TopNav.IconTitle icon={<img src={"/WesburyGov2021/static/WesburyGov2021_logo.png"}
                                      width={"36"} height={"36"} alt={"Emblem of Wesbury"}/>}>
             {config.title}
         </TopNav.IconTitle>
@@ -36,9 +36,9 @@ const Foot = (
     <Footer
         copyright={{
             text: "Protonull",
-            link: "/Wesbury/about/",
+            link: "/WesburyGov2021/about/",
             image: {
-                source: "/Wesbury/static/wesbury_emblem.png",
+                source: "/WesburyGov2021/static/WesburyGov2021_emblem.png",
                 height: 156,
                 width: 125,
                 style: {
