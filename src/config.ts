@@ -8,15 +8,15 @@ export default Object.seal(new class Config {
     navigation: Link[] = [
         {
             label: "News",
-            href: "/news"
+            href: "/WesburyGov2021/news"
         },
         {
             label: "Laws",
-            href: "/laws"
+            href: "/WesburyGov2021/laws"
         },
         {
             label: "Watchdog",
-            href: "/watchdog"
+            href: "/WesburyGov2021/watchdog"
         },
         {
             label: "Discord",
@@ -25,7 +25,7 @@ export default Object.seal(new class Config {
         },
         {
             label: "About",
-            href: "/about"
+            href: "/WesburyGov2021/about"
         }
     ];
 
