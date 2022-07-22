@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: Protonull/Wesbury
+  repo: Protonull/WesburyGov2021
   branch: main
 
 media_folder: "static/uploads/"
